@@ -129,22 +129,15 @@ export default function Contact() {
       {/* Map & Form Column */}
       <div className="col-span-1 lg:col-span-8 flex flex-col gap-6">
         {/* Map Container */}
-        <div className="w-full h-[400px] bg-surface-container-highest rounded overflow-hidden relative border border-outline-variant shadow-sm group">
-          <img
-            className="w-full h-full object-cover"
-            alt={t('contact.map.alt')}
-            src={`${import.meta.env.BASE_URL}images/corum-harita.jpg`}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-            <a
-              className="bg-power-yellow text-on-secondary-container font-body text-sm leading-5 font-bold tracking-[0.05em] px-6 py-3 rounded hover:bg-secondary-fixed transition-colors flex items-center gap-2 pointer-events-auto shadow-lg"
-              href="https://maps.google.com/?q=Mimarsinan+Mahallesi,+Çorum+Sanayi+Sitesi+Caddesi+No:+134,+Merkez+/+Çorum"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon name="directions" /> {t('contact.map.cta')}
-            </a>
-          </div>
+        <div className="w-full h-[400px] bg-surface-container-highest rounded overflow-hidden relative border border-outline-variant shadow-sm">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.8422395363464!2d34.92806677548847!3d40.52297794916674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4080d55a413236c5%3A0x518b2b1fedbb5ab1!2zSMOcU0VZxLBOIEJBWURVUiBORVdIT0xMQU5EICwgRlBUIFlFVEvEsEzEsCBTRVJWxLBTIFZFIFlFREVLIFBBUsOHQQ!5e0!3m2!1str!2str!4v1786565106920!5m2!1str!2str"
+            className="w-full h-full border-0"
+            title={t('contact.map.alt')}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+          ></iframe>
         </div>
 
         {/* Contact Form */}
