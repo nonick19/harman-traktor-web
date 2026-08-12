@@ -3,6 +3,7 @@
 @theme {
   /* Industrial Heritage renk paleti */
   --color-primary: #00264d;
+  --color-on-primary: #ffffff;
   --color-primary-container: #003c73;
   --color-heritage-blue: #00539b;
   --color-power-yellow: #fdd000;

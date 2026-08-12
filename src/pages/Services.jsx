@@ -33,10 +33,10 @@ export default function Services() {
       {/* Hero Section */}
       <section className="relative bg-primary overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
+          className="absolute inset-0 bg-cover bg-center opacity-60"
           style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/bicerdover-hero.png')` }}
         ></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-primary/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/55 to-primary/20"></div>
         <div className="relative z-10 max-w-[1440px] mx-auto px-4 md:px-16 py-24 md:py-32">
           <div className="max-w-2xl">
             <span className={`inline-flex items-center gap-2 bg-power-yellow text-on-secondary-container ${labelClass} px-4 py-1.5 rounded-xs mb-6`}>
