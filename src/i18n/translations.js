@@ -70,18 +70,26 @@ export const translations = {
         subtitle:
           "1967'den beri tarım ve endüstriyel makine sektöründe güvenin adresi. Yetkili servis, yedek parça ve küresel operasyonlarımızla yanınızdayız.",
       },
+      section: {
+        title: 'Hizmet Alanlarımız',
+        subtitle:
+          'Üç küresel markanın yetkili güvencesiyle satış, servis ve yedek parça çözümleri sunuyoruz.',
+      },
       newHolland: {
+        tag: 'Yetkili Servis & Satış',
         description:
           'Yetkili servis, traktör ve biçerdöver satış noktası. Orijinal yedek parça temini ve uzman bakım hizmetleriyle tarım operasyonlarınızı kesintisiz sürdürün.',
         cta: 'Servis Randevusu Al',
       },
       fpt: {
         title: 'FPT Motor Ustalığı',
+        tag: 'Yetkili Servis',
         description:
           'Sertifikalı uzman kadromuz ve teknik ustalığımızla FPT motorlarınız için en yüksek performansı garanti ediyoruz. Yetkili servis güvencesiyle yanınızdayız.',
         cta: 'Parça Sorgula',
       },
       iveco: {
+        tag: 'Yedek Parça Bayiliği',
         description:
           'Orijinal Iveco yedek parça bayiliği. Ticari araçlarınız için kesintisiz parça tedariği ve lojistik destek.',
         cta: 'Kataloğu İncele',
@@ -93,6 +101,12 @@ export const translations = {
           "Rusya'daki geniş çaplı biçerdöver yönetimi ve uluslararası ihracat faaliyetlerimizle, küresel tarım endüstrisine yön veriyoruz. Sınırları aşan operasyonel mükemmellik.",
         ctaExport: 'İhracat Ekibiyle Görüş',
         ctaDetails: 'Proje Detayları',
+      },
+      cta: {
+        title: 'Makineleriniz için doğru çözümü birlikte bulalım.',
+        subtitle:
+          'Servis randevusu, yedek parça veya satış talepleriniz için uzman ekibimiz size yardımcı olmaya hazır.',
+        button: 'Bize Ulaşın',
       },
     },
     contact: {
@@ -206,18 +220,26 @@ export const translations = {
         subtitle:
           'The address of trust in the agricultural and industrial machinery sector since 1967. We are by your side with authorized service, spare parts and our global operations.',
       },
+      section: {
+        title: 'Our Areas of Service',
+        subtitle:
+          'We offer sales, service and spare parts solutions backed by the authorized guarantee of three global brands.',
+      },
       newHolland: {
+        tag: 'Authorized Service & Sales',
         description:
           'Authorized service and sales point for tractors and combine harvesters. Keep your agricultural operations running without interruption with genuine spare parts supply and expert maintenance services.',
         cta: 'Book a Service Appointment',
       },
       fpt: {
         title: 'FPT Engine Mastery',
+        tag: 'Authorized Service',
         description:
           'With our certified expert staff and technical craftsmanship, we guarantee the highest performance for your FPT engines. We are by your side with the assurance of authorized service.',
         cta: 'Inquire About Parts',
       },
       iveco: {
+        tag: 'Spare Parts Dealership',
         description:
           'Authorized dealer of genuine Iveco spare parts. Uninterrupted parts supply and logistics support for your commercial vehicles.',
         cta: 'Browse the Catalog',
@@ -229,6 +251,12 @@ export const translations = {
           'With our large-scale combine harvester management in Russia and our international export activities, we shape the global agricultural industry. Operational excellence beyond borders.',
         ctaExport: 'Meet the Export Team',
         ctaDetails: 'Project Details',
+      },
+      cta: {
+        title: "Let's find the right solution for your machines together.",
+        subtitle:
+          'Our expert team is ready to help you with service appointments, spare parts or sales inquiries.',
+        button: 'Contact Us',
       },
     },
     contact: {
@@ -342,18 +370,26 @@ export const translations = {
         subtitle:
           'Адрес доверия в сфере сельскохозяйственной и промышленной техники с 1967 года. Мы рядом с вами благодаря официальному сервису, запасным частям и международным операциям.',
       },
+      section: {
+        title: 'Направления наших услуг',
+        subtitle:
+          'Мы предлагаем решения по продаже, обслуживанию и поставке запасных частей с официальной гарантией трёх мировых брендов.',
+      },
       newHolland: {
+        tag: 'Официальный сервис и продажи',
         description:
           'Официальный сервис и точка продаж тракторов и зерноуборочных комбайнов. Обеспечивайте бесперебойную работу вашего сельхозпроизводства благодаря оригинальным запчастям и профессиональному обслуживанию.',
         cta: 'Записаться на сервис',
       },
       fpt: {
         title: 'Мастерство двигателей FPT',
+        tag: 'Официальный сервис',
         description:
           'С нашим сертифицированным персоналом и техническим мастерством мы гарантируем максимальную производительность ваших двигателей FPT. Мы рядом с вами с надёжностью официального сервиса.',
         cta: 'Подобрать запчасти',
       },
       iveco: {
+        tag: 'Дилерство запчастей',
         description:
           'Официальный дилер оригинальных запчастей Iveco. Бесперебойные поставки запчастей и логистическая поддержка для вашего коммерческого транспорта.',
         cta: 'Смотреть каталог',
@@ -365,6 +401,12 @@ export const translations = {
           'Благодаря масштабному управлению парком зерноуборочных комбайнов в России и международной экспортной деятельности мы задаём направление мировой сельскохозяйственной отрасли. Операционное совершенство без границ.',
         ctaExport: 'Связаться с экспортным отделом',
         ctaDetails: 'Детали проекта',
+      },
+      cta: {
+        title: 'Давайте вместе найдём правильное решение для вашей техники.',
+        subtitle:
+          'Наша команда экспертов готова помочь вам с записью на сервис, запасными частями или вопросами покупки.',
+        button: 'Связаться с нами',
       },
     },
     contact: {
