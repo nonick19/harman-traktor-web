@@ -8,17 +8,17 @@ export default function Home() {
     {
       key: 'newHolland',
       name: 'New Holland',
-      image: '/images/bicerdover-hero.png',
+      image: `${import.meta.env.BASE_URL}images/bicerdover-hero.png`,
     },
     {
       key: 'fpt',
       name: 'FPT Industrial',
-      image: '/images/fpt-motor-servis.png',
+      image: `${import.meta.env.BASE_URL}images/fpt-motor-servis.png`,
     },
     {
       key: 'iveco',
       name: 'Iveco',
-      image: '/images/ticari-arac-yedek-parca.jpg',
+      image: `${import.meta.env.BASE_URL}images/ticari-arac-yedek-parca.jpg`,
     },
   ]
 
@@ -28,7 +28,7 @@ export default function Home() {
       <section className="relative h-[819px] min-h-[600px] w-full bg-tertiary overflow-hidden">
         <div
           className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/bicerdover-hero.png')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/bicerdover-hero.png')` }}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="relative h-full max-w-[1440px] mx-auto px-4 md:px-16 flex items-center">

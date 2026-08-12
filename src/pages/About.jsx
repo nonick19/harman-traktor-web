@@ -12,7 +12,7 @@ export default function About() {
           <div
             className="bg-cover bg-center w-full h-full object-cover"
             data-alt="A cinematic, high-contrast photograph of an industrial agricultural setting at dawn. Heavy machinery and tractors are visible in silhouette against a warm, rising sun. The overall aesthetic is 'Corporate Modern' and 'Global Trust', emphasizing rugged industrial authority, reliability, and precision. Deep shadows and bright highlights create a sense of scale and power."
-            style={{ backgroundImage: "url('/images/bicerdover-hero.png')" }}
+            style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/bicerdover-hero.png')` }}
           ></div>
           <div className="absolute inset-0 bg-gradient-to-r from-tertiary/90 to-tertiary/40"></div>
         </div>
@@ -38,7 +38,7 @@ export default function About() {
               <img
                 className="w-full h-auto object-cover aspect-[4/5]"
                 data-alt="A black and white portrait photo of a rugged, experienced founder standing in an early industrial workshop setting (circa 1960s). He is inspecting a heavy metal tractor part. The lighting is dramatic, highlighting the texture of the metal and the determination in his expression. The aesthetic conveys mastery, heritage, and industrial authority, aligning with a corporate modern style."
-                src="/images/kurucu-huseyin-baydur.jpg"
+                src={`${import.meta.env.BASE_URL}images/kurucu-huseyin-baydur.jpg`}
                 alt={t('about.founder.alt')}
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-tertiary/80 to-transparent p-6">

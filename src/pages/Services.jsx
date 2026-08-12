@@ -10,7 +10,7 @@ export default function Services() {
       <section className="relative h-[614px] min-h-[500px] flex items-center justify-center bg-industrial-gray mb-24 overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-60"
-          style={{ backgroundImage: "url('/images/bicerdover-hero.png')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/bicerdover-hero.png')` }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-t from-tertiary to-transparent opacity-80"></div>
         <div className="relative z-10 text-center px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto">
@@ -36,7 +36,7 @@ export default function Services() {
                 className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
                 style={{
                   backgroundImage:
-                    "url('/images/new-holland-servis.jpg')",
+                    `url('${import.meta.env.BASE_URL}images/new-holland-servis.jpg')`,
                 }}
               ></div>
             </div>
@@ -59,7 +59,7 @@ export default function Services() {
             <div className="h-48 overflow-hidden relative">
               <div
                 className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-700"
-                style={{ backgroundImage: "url('/images/fpt-motor-servis.png')" }}
+                style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/fpt-motor-servis.png')` }}
               ></div>
             </div>
             <div className="p-8 flex-grow flex flex-col justify-between">
@@ -100,7 +100,7 @@ export default function Services() {
           <div className="lg:col-span-8 bg-tertiary text-on-tertiary rounded-lg overflow-hidden shadow-sm relative group">
             <div
               className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay group-hover:opacity-40 transition-opacity duration-500"
-              style={{ backgroundImage: "url('/images/bicerdover-hero.png')" }}
+              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/bicerdover-hero.png')` }}
             ></div>
             <div className="relative z-10 p-8 md:p-12 flex flex-col justify-center h-full">
               <span className="inline-block bg-power-yellow text-on-secondary-container font-label-bold text-label-bold px-3 py-1 rounded-full mb-4 self-start text-xs uppercase">
