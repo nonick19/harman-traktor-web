@@ -6,6 +6,20 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const fields = e.target.elements
+    const subjectSelect = fields.subject
+    const subject = subjectSelect.options[subjectSelect.selectedIndex].text
+    const lines = [
+      t('contact.form.whatsappTitle'),
+      `${t('contact.form.nameLabel')}: ${fields.name.value}`,
+      `${t('contact.form.companyLabel')}: ${fields.company.value || '-'}`,
+      `${t('contact.form.emailLabel')}: ${fields.email.value || '-'}`,
+      `${t('contact.form.phoneLabel')}: ${fields.phone.value}`,
+      `${t('contact.form.subjectLabel')}: ${subject}`,
+      `${t('contact.form.messageLabel')}: ${fields.message.value}`,
+    ]
+    const url = `https://wa.me/905324843395?text=${encodeURIComponent(lines.join('\n'))}`
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   return (
