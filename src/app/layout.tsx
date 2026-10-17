@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import { localBusinessJsonLd } from '@/lib/seo'
+import { localBusinessJsonLd, OG_IMAGE } from '@/lib/seo'
 import { SITE_CONTACT, SITE_URL } from '@/lib/site'
 import './globals.css'
 
@@ -44,6 +44,14 @@ export const metadata: Metadata = {
     title: 'Hüseyin Baydur | New Holland, FPT Industrial ve Iveco Yetkili Distribütörü',
     description:
       '1967’den beri tarım ve ticari araç alanında güvenin adresi: yetkili servis, orijinal yedek parça ve FPT motor revizyonu.',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: SITE_CONTACT.companyName }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hüseyin Baydur | New Holland, FPT Industrial ve Iveco Yetkili Distribütörü',
+    description:
+      '1967’den beri tarım ve ticari araç alanında güvenin adresi.',
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,

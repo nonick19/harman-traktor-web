@@ -1,7 +1,7 @@
 import PageHero from '@/components/PageHero'
 import ServicesGrid from '@/components/sections/ServicesGrid'
 import CtaBanner from '@/components/CtaBanner'
-import { pageMetadata } from '@/lib/seo'
+import { pageMetadata, servicesJsonLd } from '@/lib/seo'
 
 export const metadata = pageMetadata({
   title: 'Hizmetler',
@@ -20,6 +20,10 @@ export const metadata = pageMetadata({
 export default function HizmetlerPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd()) }}
+      />
       <PageHero
         eyebrow="Hizmetler"
         breadcrumb="Hizmetler"

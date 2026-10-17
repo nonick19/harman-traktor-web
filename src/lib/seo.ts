@@ -3,10 +3,14 @@ import {
   AREA_SERVED,
   FOUNDING_YEAR,
   OPENING_HOURS,
+  SERVICES,
   SITE_CONTACT,
   SITE_GEO,
   SITE_URL,
 } from '@/lib/site'
+
+/** Sosyal paylaşım görseli (statik dosya). */
+export const OG_IMAGE = '/og-image.png'
 
 /**
  * Sayfa bazlı meta veri üretir: başlık, açıklama, canonical ve sosyal kartlar.
@@ -40,11 +44,13 @@ export function pageMetadata({
       siteName: SITE_CONTACT.companyName,
       title,
       description,
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: [OG_IMAGE],
     },
   }
 }
@@ -86,5 +92,28 @@ export function localBusinessJsonLd(): Record<string, unknown> {
       { '@type': 'Brand', name: 'FPT Industrial' },
       { '@type': 'Brand', name: 'Iveco' },
     ],
+  }
+}
+
+/** Hizmetlerin schema.org ItemList yapılandırılmış verisi. */
+export function servicesJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: SERVICES.map((service, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Service',
+        name: service.title,
+        description: service.summary,
+        areaServed: AREA_SERVED.map((city) => ({ '@type': 'City', name: city })),
+        provider: {
+          '@type': 'AutomotiveBusiness',
+          name: SITE_CONTACT.companyName,
+          telephone: SITE_CONTACT.phoneE164,
+        },
+      },
+    })),
   }
 }

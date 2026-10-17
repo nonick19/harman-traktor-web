@@ -104,6 +104,31 @@ export default function IletisimPage() {
             <p className="mt-2 text-sm text-muted">
               Bilgilerinizi bırakın, ekibimiz en kısa sürede dönüş yapsın.
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border border-line bg-canvas px-4 py-2 text-xs font-semibold text-navy transition-colors duration-200 hover:bg-surface-strong"
+              >
+                <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
+                WhatsApp
+              </a>
+              <a
+                href={`tel:${SITE_CONTACT.phoneE164}`}
+                className="inline-flex items-center gap-2 rounded-lg border border-line bg-canvas px-4 py-2 text-xs font-semibold text-navy transition-colors duration-200 hover:bg-surface-strong"
+              >
+                <Phone className="h-3.5 w-3.5" aria-hidden="true" />
+                Telefon
+              </a>
+              <a
+                href={`mailto:${SITE_CONTACT.email}`}
+                className="inline-flex items-center gap-2 rounded-lg border border-line bg-canvas px-4 py-2 text-xs font-semibold text-navy transition-colors duration-200 hover:bg-surface-strong"
+              >
+                <Mail className="h-3.5 w-3.5" aria-hidden="true" />
+                E-posta
+              </a>
+            </div>
             <div className="mt-8">
               <ContactForm />
             </div>
