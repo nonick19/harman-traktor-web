@@ -73,13 +73,13 @@ export function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${SITE_CONTACT.whatsappNumber}?text=${encodeURIComponent(message)}`
 }
 
-/** Üst menü bağlantıları (tek sayfa bölüm çapaları). */
+/** Üst menü bağlantıları (çok sayfalı yapı rotaları). */
 export const NAV_LINKS: readonly NavLink[] = [
-  { label: 'Kurumsal', href: '#kurumsal' },
-  { label: 'Hizmetler', href: '#hizmetler' },
-  { label: 'Markalar', href: '#markalar' },
-  { label: 'Referanslar', href: '#referanslar' },
-  { label: 'İletişim', href: '#iletisim' },
+  { label: 'Kurumsal', href: '/kurumsal' },
+  { label: 'Hizmetler', href: '/hizmetler' },
+  { label: 'Markalar', href: '/markalar' },
+  { label: 'Referanslar', href: '/referanslar' },
+  { label: 'İletişim', href: '/iletisim' },
 ]
 
 /** Sunulan başlıca hizmetler (tanıtım odaklı). */
@@ -200,4 +200,35 @@ export const TIMELINE: readonly TimelineItem[] = [
     description:
       'İhracat ve yurt dışı saha projeleriyle operasyonlar sınırları aşarak büyüdü.',
   },
+]
+
+/** Kurumsal künye ve coğrafi bilgiler (SEO / yapılandırılmış veri için). */
+export const SITE_URL = 'https://www.baydur.net'
+export const FOUNDING_YEAR = 1967
+
+export interface SiteGeo {
+  readonly latitude: number
+  readonly longitude: number
+}
+
+/** Servis merkezinin koordinatları. */
+export const SITE_GEO: SiteGeo = {
+  latitude: 40.5229779,
+  longitude: 34.9280667,
+}
+
+/** Haftalık çalışma saatleri (schema.org openingHours formatı). */
+export const OPENING_HOURS: readonly string[] = [
+  'Mo-Fr 08:00-18:00',
+  'Sa 08:00-14:00',
+]
+
+/** Hizmet verilen başlıca iller. */
+export const AREA_SERVED: readonly string[] = [
+  'Çorum',
+  'Samsun',
+  'Amasya',
+  'Tokat',
+  'Yozgat',
+  'Kırıkkale',
 ]

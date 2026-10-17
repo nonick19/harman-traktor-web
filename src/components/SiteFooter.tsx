@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { MapPin, Phone, Mail, MessageCircle, Tractor } from 'lucide-react'
 import { NAV_LINKS, SERVICES, SITE_CONTACT, buildWhatsAppUrl } from '@/lib/site'
 
@@ -10,14 +11,14 @@ export default function SiteFooter() {
     <footer className="bg-navy-deep text-slate-300">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3" aria-label="Ana sayfa">
             <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10 text-nh-yellow">
               <Tractor className="h-6 w-6" aria-hidden="true" />
             </span>
             <span className="text-lg font-bold tracking-tight text-white">
               Hüseyin Baydur
             </span>
-          </div>
+          </Link>
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
             {SITE_CONTACT.legalNote}. 1967’den beri Çorum’dan dünyaya; yetkili servis,
             orijinal yedek parça ve motor revizyonu.
@@ -31,12 +32,12 @@ export default function SiteFooter() {
           <ul className="mt-4 space-y-3 text-sm">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="text-slate-400 transition-colors duration-200 hover:text-nh-yellow"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -49,12 +50,12 @@ export default function SiteFooter() {
           <ul className="mt-4 space-y-3 text-sm">
             {SERVICES.map((service) => (
               <li key={service.id}>
-                <a
-                  href="#hizmetler"
+                <Link
+                  href="/hizmetler"
                   className="text-slate-400 transition-colors duration-200 hover:text-nh-yellow"
                 >
                   {service.title}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -67,9 +68,7 @@ export default function SiteFooter() {
           <ul className="mt-4 space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-nh-yellow" aria-hidden="true" />
-              <span className="text-slate-400">
-                {SITE_CONTACT.addressLines.join(' ')}
-              </span>
+              <span className="text-slate-400">{SITE_CONTACT.addressLines.join(' ')}</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone className="h-4 w-4 shrink-0 text-nh-yellow" aria-hidden="true" />
