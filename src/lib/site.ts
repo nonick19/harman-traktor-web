@@ -203,7 +203,7 @@ export const TIMELINE: readonly TimelineItem[] = [
 ]
 
 /** Kurumsal künye ve coğrafi bilgiler (SEO / yapılandırılmış veri için). */
-export const SITE_URL = 'https://www.baydur.net'
+export const SITE_URL = 'https://baydur.net'
 export const FOUNDING_YEAR = 1967
 
 export interface SiteGeo {
