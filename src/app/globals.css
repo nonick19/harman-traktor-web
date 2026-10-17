@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/*
+ * baydur.net — Kurumsal tasarım token'ları.
+ * Açık, sakin ve güven veren kurumsal dil: beyaz zemin, lacivert vurgu,
+ * ince gri çizgiler ve ölçülü marka aksanları (New Holland sarısı, FPT kırmızısı).
+ */
+@theme {
+  --color-canvas: #ffffff;
+  --color-surface: #f6f8fb;
+  --color-surface-strong: #edf1f7;
+  --color-ink: #0f1b2d;
+  --color-muted: #5b6b83;
+  --color-line: #e3e8f0;
+  --color-navy: #0b2a5b;
+  --color-navy-deep: #071a3a;
+  --color-nh-yellow: #f5b800;
+  --color-fpt-red: #e30613;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SFMono-Regular", "Menlo",
+    "Consolas", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f1b2d;
+  }
+
+  ::selection {
+    background-color: #0b2a5b;
+    color: #ffffff;
+  }
+}
