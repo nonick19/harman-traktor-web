@@ -25,7 +25,8 @@ export function pageMetadata({
   path,
   keywords,
 }: PageMetaInput): Metadata {
-  const url = path === '/' ? SITE_URL : `${SITE_URL}${path}`
+  // Statik dışa aktarımda trailingSlash kullanıldığı için canonical da "/" ile biter.
+  const url = path === '/' ? `${SITE_URL}/` : `${SITE_URL}${path}/`
 
   return {
     title,

@@ -1,6 +1,9 @@
 import type { MetadataRoute } from 'next'
 import { SITE_CONTACT } from '@/lib/site'
 
+// `output: export` ile statik üretim için gerekli.
+export const dynamic = 'force-static'
+
 /** Web uygulaması manifesti (mobil kurulum ve tema rengi). */
 export default function manifest(): MetadataRoute.Manifest {
   return {

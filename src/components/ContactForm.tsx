@@ -60,16 +60,35 @@ export default function ContactForm() {
     setStatus('sending')
     setErrorMessage('')
 
+    // Statik barındırmada anahtar yoksa form sessizce başarısız olmasın: yedeğe yönlendir.
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
+    if (!accessKey) {
+      setStatus('error')
+      setErrorMessage(
+        'Çevrimiçi form servisi henüz yapılandırılmamış. Aşağıdaki WhatsApp veya e-posta seçeneklerinden bize ulaşabilirsiniz.',
+      )
+      return
+    }
+
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `[Web] ${payload.subject}`,
+          from_name: `${SITE_CONTACT.companyName} Web`,
+          name: payload.name,
+          company: payload.company,
+          email: payload.email,
+          phone: payload.phone,
+          message: payload.message,
+        }),
       })
       const result: unknown = await response.json().catch(() => ({}))
-      const parsed = (result ?? {}) as { ok?: boolean; error?: string }
+      const parsed = (result ?? {}) as { success?: boolean; message?: string }
 
-      if (response.ok && parsed.ok) {
+      if (parsed.success) {
         setStatus('success')
         form.reset()
         return
@@ -77,8 +96,8 @@ export default function ContactForm() {
 
       setStatus('error')
       setErrorMessage(
-        typeof parsed.error === 'string'
-          ? parsed.error
+        typeof parsed.message === 'string' && parsed.message
+          ? parsed.message
           : 'Mesajınız gönderilemedi. Lütfen tekrar deneyin.',
       )
     } catch {
