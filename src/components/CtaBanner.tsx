@@ -1,12 +1,17 @@
 import Link from 'next/link'
 import { ArrowRight, Phone } from 'lucide-react'
-import { SITE_CONTACT } from '@/lib/site'
+import { ROUTES, SITE_CONTACT } from '@/lib/site'
+import { localizedHref, type Dictionary, type Locale } from '@/i18n'
 
 /** Sayfa altlarında yinelenen harekete geçirici (CTA) bandı. */
 export default function CtaBanner({
+  locale,
+  dict,
   title,
   description,
 }: {
+  locale: Locale
+  dict: Dictionary
   title: string
   description: string
 }) {
@@ -23,10 +28,10 @@ export default function CtaBanner({
         </div>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Link
-            href="/iletisim"
+            href={localizedHref(locale, ROUTES.iletisim)}
             className="inline-flex items-center justify-center gap-2 rounded-lg bg-nh-yellow px-6 py-3.5 text-sm font-semibold text-navy-deep transition-colors duration-200 hover:bg-white"
           >
-            İletişim
+            {dict.ctaBanner.contact}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
           <a

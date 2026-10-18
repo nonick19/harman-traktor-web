@@ -1,35 +1,40 @@
 import Image from 'next/image'
-import { Check } from 'lucide-react'
-import { SERVICES } from '@/lib/site'
+import { Check, Wrench } from 'lucide-react'
+import { SERVICE_IMAGES } from '@/lib/site'
 import { SERVICE_ICONS } from '@/lib/icons'
-import { Wrench } from 'lucide-react'
+import type { Dictionary } from '@/i18n'
 
 /**
  * Hizmet kartları.
  * `compact` ana sayfadaki özet, `detailed` hizmetler sayfasındaki tam içerik içindir.
  */
 export default function ServicesGrid({
+  dict,
   variant = 'detailed',
 }: {
+  dict: Dictionary
   variant?: 'compact' | 'detailed'
 }) {
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-      {SERVICES.map((service) => {
+      {dict.services.map((service) => {
         const Icon = SERVICE_ICONS[service.id] ?? Wrench
+        const image = SERVICE_IMAGES[service.id]
         return (
           <article
             key={service.id}
             className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-canvas transition-colors duration-200 hover:border-navy/40"
           >
             <div className="relative aspect-[16/10] w-full overflow-hidden">
-              <Image
-                src={service.image}
-                alt={service.imageAlt}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              {image ? (
+                <Image
+                  src={image}
+                  alt={service.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              ) : null}
             </div>
             <div className="flex flex-1 flex-col p-7">
               <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-surface-strong text-navy">

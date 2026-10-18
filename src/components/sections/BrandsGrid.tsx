@@ -1,17 +1,18 @@
-import { BRANDS } from '@/lib/site'
+import { BRAND_ACCENTS } from '@/lib/site'
+import type { Dictionary } from '@/i18n'
 
 /** Yetkili olunan markaların aksan çizgili kartları. */
-export default function BrandsGrid() {
+export default function BrandsGrid({ dict }: { dict: Dictionary }) {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-      {BRANDS.map((brand) => (
+      {dict.brands.map((brand) => (
         <div
           key={brand.id}
           className="relative overflow-hidden rounded-2xl border border-line bg-surface p-8"
         >
           <span
             className="absolute inset-x-0 top-0 h-1.5"
-            style={{ backgroundColor: brand.accent }}
+            style={{ backgroundColor: BRAND_ACCENTS[brand.id] ?? '#0B2A5B' }}
             aria-hidden="true"
           />
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">

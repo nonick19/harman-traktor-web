@@ -1,14 +1,12 @@
-import { REFERENCE_STATS, SECTOR_TAGS } from '@/lib/site'
+import type { Dictionary } from '@/i18n'
 
 /** Lacivert zeminli güven bandı: kurumsal rakamlar ve sektör etiketleri. */
 export default function StatsBand({
+  dict,
   showTags = true,
-  heading = 'Rakamlarla güven',
-  intro = 'Bölgedeki üreticiler, kooperatifler ve ticari filolar için kesintisiz hizmet. Deneyimimiz, sahadaki her sezonda test ediliyor.',
 }: {
+  dict: Dictionary
   showTags?: boolean
-  heading?: string
-  intro?: string
 }) {
   return (
     <section className="bg-navy py-20 text-white lg:py-28">
@@ -18,18 +16,18 @@ export default function StatsBand({
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-nh-yellow" aria-hidden="true" />
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
-                Referanslar
+                {dict.stats.eyebrow}
               </span>
             </div>
             <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              {heading}
+              {dict.stats.heading}
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300">
-              {intro}
+              {dict.stats.intro}
             </p>
             {showTags ? (
               <div className="mt-8 flex flex-wrap gap-2.5">
-                {SECTOR_TAGS.map((tag) => (
+                {dict.stats.tags.map((tag) => (
                   <span
                     key={tag}
                     className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-medium text-slate-200"
@@ -42,7 +40,7 @@ export default function StatsBand({
           </div>
 
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10">
-            {REFERENCE_STATS.map((stat) => (
+            {dict.stats.items.map((stat) => (
               <div key={stat.label} className="bg-navy p-8">
                 <p className="font-mono text-3xl font-bold text-nh-yellow sm:text-4xl">
                   {stat.value}

@@ -1,8 +1,19 @@
 import Link from 'next/link'
 import { ArrowLeft, Tractor } from 'lucide-react'
-import { NAV_LINKS } from '@/lib/site'
+import { ROUTES } from '@/lib/site'
+import { getDictionary } from '@/i18n'
+
+const dict = getDictionary('tr')
 
 export default function NotFound() {
+  const navItems = [
+    { path: ROUTES.kurumsal, label: dict.nav.kurumsal },
+    { path: ROUTES.hizmetler, label: dict.nav.hizmetler },
+    { path: ROUTES.markalar, label: dict.nav.markalar },
+    { path: ROUTES.referanslar, label: dict.nav.referanslar },
+    { path: ROUTES.iletisim, label: dict.nav.iletisim },
+  ]
+
   return (
     <section className="bg-surface">
       <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
@@ -11,31 +22,30 @@ export default function NotFound() {
         </span>
         <p className="mt-8 font-mono text-5xl font-bold text-navy">404</p>
         <h1 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
-          Aradığınız sayfa bulunamadı
+          {dict.notFound.title}
         </h1>
         <p className="mt-4 text-base leading-relaxed text-muted">
-          Sayfa taşınmış veya kaldırılmış olabilir. Aşağıdaki bağlantılardan devam
-          edebilirsiniz.
+          {dict.notFound.text}
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-2.5">
-          {NAV_LINKS.map((link) => (
+          {navItems.map((item) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={item.path}
+              href={item.path}
               className="rounded-full border border-line bg-canvas px-5 py-2.5 text-sm font-medium text-navy transition-colors duration-200 hover:border-navy/40"
             >
-              {link.label}
+              {item.label}
             </Link>
           ))}
         </div>
 
         <Link
-          href="/"
+          href={ROUTES.home}
           className="mt-8 inline-flex items-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-deep"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          Ana sayfaya dön
+          {dict.notFound.backHome}
         </Link>
       </div>
     </section>

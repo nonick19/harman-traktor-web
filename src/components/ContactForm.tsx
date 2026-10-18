@@ -3,14 +3,7 @@
 import { useState, type FormEvent } from 'react'
 import { Send, Check, Loader2, AlertCircle, MessageCircle, Mail } from 'lucide-react'
 import { SITE_CONTACT, buildWhatsAppUrl } from '@/lib/site'
-
-const SUBJECTS: readonly string[] = [
-  'Yetkili Servis / Bakım',
-  'Orijinal Yedek Parça',
-  'FPT Motor Revizyonu',
-  'Satış ve Fiyat Bilgisi',
-  'Diğer',
-]
+import type { Dictionary } from '@/i18n'
 
 interface FormValues {
   readonly name: string
@@ -23,22 +16,22 @@ interface FormValues {
 
 type Status = 'idle' | 'sending' | 'success' | 'error'
 
-function buildMailto(values: FormValues): string {
+function buildMailto(values: FormValues, email: string): string {
   const body = [
-    `Ad Soyad: ${values.name}`,
-    `Firma: ${values.company || '-'}`,
-    `E-posta: ${values.email || '-'}`,
-    `Telefon: ${values.phone || '-'}`,
+    values.name,
+    values.company,
+    values.email,
+    values.phone,
     '',
     values.message,
   ].join('\n')
-  return `mailto:${SITE_CONTACT.email}?subject=${encodeURIComponent(
+  return `mailto:${email}?subject=${encodeURIComponent(
     `[Web] ${values.subject}`,
   )}&body=${encodeURIComponent(body)}`
 }
 
-/** Kurumsal iletişim formu — sunucu tarafında Resend ile e-posta gönderir. */
-export default function ContactForm() {
+/** Kurumsal iletişim formu — Web3Forms ile gönderir, hata durumunda WhatsApp/e-posta yedeği sunar. */
+export default function ContactForm({ dict }: { dict: Dictionary }) {
   const [status, setStatus] = useState<Status>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const [values, setValues] = useState<FormValues | null>(null)
@@ -52,7 +45,7 @@ export default function ContactForm() {
       company: String(data.get('company') ?? '').trim(),
       email: String(data.get('email') ?? '').trim(),
       phone: String(data.get('phone') ?? '').trim(),
-      subject: String(data.get('subject') ?? 'Genel').trim(),
+      subject: String(data.get('subject') ?? dict.form.subjectOptions[0]).trim(),
       message: String(data.get('message') ?? '').trim(),
     }
 
@@ -64,9 +57,7 @@ export default function ContactForm() {
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
     if (!accessKey) {
       setStatus('error')
-      setErrorMessage(
-        'Çevrimiçi form servisi henüz yapılandırılmamış. Aşağıdaki WhatsApp veya e-posta seçeneklerinden bize ulaşabilirsiniz.',
-      )
+      setErrorMessage(dict.form.notConfigured)
       return
     }
 
@@ -98,11 +89,11 @@ export default function ContactForm() {
       setErrorMessage(
         typeof parsed.message === 'string' && parsed.message
           ? parsed.message
-          : 'Mesajınız gönderilemedi. Lütfen tekrar deneyin.',
+          : dict.form.errorGeneric,
       )
     } catch {
       setStatus('error')
-      setErrorMessage('Bağlantı hatası. Lütfen tekrar deneyin.')
+      setErrorMessage(dict.form.errorConnection)
     }
   }
 
@@ -112,10 +103,9 @@ export default function ContactForm() {
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-nh-yellow">
           <Check className="h-7 w-7" aria-hidden="true" />
         </span>
-        <h3 className="mt-6 text-lg font-semibold text-navy">Mesajınız iletildi</h3>
+        <h3 className="mt-6 text-lg font-semibold text-navy">{dict.form.successTitle}</h3>
         <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted">
-          Teşekkürler, en kısa sürede size dönüş yapacağız. Acil durumlar için
-          doğrudan telefon veya WhatsApp’tan ulaşabilirsiniz.
+          {dict.form.successText}
         </p>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
@@ -129,7 +119,7 @@ export default function ContactForm() {
             onClick={() => setStatus('idle')}
             className="inline-flex items-center justify-center rounded-lg border border-line px-6 py-3 text-sm font-semibold text-navy transition-colors duration-200 hover:bg-surface"
           >
-            Yeni mesaj
+            {dict.form.newMessage}
           </button>
         </div>
       </div>
@@ -142,69 +132,70 @@ export default function ContactForm() {
     <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-5 sm:grid-cols-2">
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="text-sm font-semibold text-ink">
-          Ad Soyad
+          {dict.form.nameLabel}
         </label>
         <input
           id="name"
           name="name"
           type="text"
           required
-          placeholder="Adınız ve soyadınız"
+          placeholder={dict.form.namePlaceholder}
           className="rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-muted/70 focus:border-navy focus:ring-1 focus:ring-navy"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="company" className="text-sm font-semibold text-ink">
-          Firma <span className="font-normal text-muted">(opsiyonel)</span>
+          {dict.form.companyLabel}{' '}
+          <span className="font-normal text-muted">{dict.form.companyOptional}</span>
         </label>
         <input
           id="company"
           name="company"
           type="text"
-          placeholder="Firma / işletme adı"
+          placeholder={dict.form.companyPlaceholder}
           className="rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-muted/70 focus:border-navy focus:ring-1 focus:ring-navy"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="email" className="text-sm font-semibold text-ink">
-          E-posta
+          {dict.form.emailLabel}
         </label>
         <input
           id="email"
           name="email"
           type="email"
           required
-          placeholder="ornek@eposta.com"
+          placeholder={dict.form.emailPlaceholder}
           className="rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-muted/70 focus:border-navy focus:ring-1 focus:ring-navy"
         />
       </div>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="phone" className="text-sm font-semibold text-ink">
-          Telefon
+          {dict.form.phoneLabel}
         </label>
         <input
           id="phone"
           name="phone"
           type="tel"
-          placeholder="+90 5__ ___ __ __"
+          placeholder={dict.form.phonePlaceholder}
           className="rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-muted/70 focus:border-navy focus:ring-1 focus:ring-navy"
         />
       </div>
 
       <div className="flex flex-col gap-2 sm:col-span-2">
         <label htmlFor="subject" className="text-sm font-semibold text-ink">
-          Konu
+          {dict.form.subjectLabel}
         </label>
         <select
           id="subject"
           name="subject"
-          defaultValue={SUBJECTS[0]}
+          defaultValue={dict.form.subjectOptions[0]}
           className="rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 focus:border-navy focus:ring-1 focus:ring-navy"
         >
-          {SUBJECTS.map((subject) => (
+          {dict.form.subjectOptions.map((subject) => (
             <option key={subject} value={subject}>
               {subject}
             </option>
@@ -214,14 +205,14 @@ export default function ContactForm() {
 
       <div className="flex flex-col gap-2 sm:col-span-2">
         <label htmlFor="message" className="text-sm font-semibold text-ink">
-          Mesajınız
+          {dict.form.messageLabel}
         </label>
         <textarea
           id="message"
           name="message"
           required
           rows={5}
-          placeholder="Size nasıl yardımcı olabiliriz?"
+          placeholder={dict.form.messagePlaceholder}
           className="resize-none rounded-lg border border-line bg-canvas px-4 py-3 text-sm text-ink outline-none transition-colors duration-200 placeholder:text-muted/70 focus:border-navy focus:ring-1 focus:ring-navy"
         />
       </div>
@@ -236,21 +227,21 @@ export default function ContactForm() {
             <div className="flex flex-wrap gap-2">
               <a
                 href={buildWhatsAppUrl(
-                  `Merhaba, web sitesi formundan yazıyorum.\n\n${values.message}`,
+                  `${dict.whatsappFormMessage}\n\n${values.message}`,
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-navy px-4 py-2 text-xs font-semibold text-white transition-colors duration-200 hover:bg-navy-deep"
               >
                 <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
-                WhatsApp ile gönder
+                {dict.form.fallbackWhatsApp}
               </a>
               <a
-                href={buildMailto(values)}
+                href={buildMailto(values, SITE_CONTACT.email)}
                 className="inline-flex items-center gap-2 rounded-lg border border-line bg-canvas px-4 py-2 text-xs font-semibold text-navy transition-colors duration-200 hover:bg-surface"
               >
                 <Mail className="h-3.5 w-3.5" aria-hidden="true" />
-                E-posta ile gönder
+                {dict.form.fallbackEmail}
               </a>
             </div>
           ) : null}
@@ -259,8 +250,7 @@ export default function ContactForm() {
 
       <div className="flex flex-col gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-xs leading-relaxed text-muted">
-          Bilgileriniz yalnızca size dönüş yapmak için kullanılır, üçüncü taraflarla
-          paylaşılmaz.
+          {dict.form.privacy}
         </p>
         <button
           type="submit"
@@ -269,12 +259,12 @@ export default function ContactForm() {
         >
           {sending ? (
             <>
-              Gönderiliyor
+              {dict.form.sending}
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
             </>
           ) : (
             <>
-              Gönder
+              {dict.form.submit}
               <Send className="h-4 w-4" aria-hidden="true" />
             </>
           )}

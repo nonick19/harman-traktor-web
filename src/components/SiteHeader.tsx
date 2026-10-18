@@ -4,9 +4,19 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, Tractor } from 'lucide-react'
-import { NAV_LINKS, SITE_CONTACT } from '@/lib/site'
+import { ROUTES, SITE_CONTACT } from '@/lib/site'
+import { localizedHref, type Dictionary, type Locale } from '@/i18n'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
-export default function SiteHeader() {
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/'
+
+export default function SiteHeader({
+  locale,
+  dict,
+}: {
+  locale: Locale
+  dict: Dictionary
+}) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -22,8 +32,19 @@ export default function SiteHeader() {
     setMenuOpen(false)
   }, [pathname])
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href)
+  const current = normalize(pathname)
+
+  const navItems = [
+    { path: ROUTES.kurumsal, label: dict.nav.kurumsal },
+    { path: ROUTES.hizmetler, label: dict.nav.hizmetler },
+    { path: ROUTES.markalar, label: dict.nav.markalar },
+    { path: ROUTES.referanslar, label: dict.nav.referanslar },
+    { path: ROUTES.iletisim, label: dict.nav.iletisim },
+  ]
+
+  const isActive = (path: string) => current === normalize(localizedHref(locale, path))
+
+  const contactHref = localizedHref(locale, ROUTES.iletisim)
 
   return (
     <header
@@ -32,7 +53,11 @@ export default function SiteHeader() {
       }`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" aria-label="Ana sayfa">
+        <Link
+          href={localizedHref(locale, ROUTES.home)}
+          className="flex items-center gap-3"
+          aria-label={dict.header.homeAria}
+        >
           <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-white">
             <Tractor className="h-6 w-6" aria-hidden="true" />
           </span>
@@ -41,22 +66,22 @@ export default function SiteHeader() {
               HÜSEYİN BAYDUR
             </span>
             <span className="block text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
-              Yetkili Distribütör · 1967
+              {dict.header.brandSubtitle}
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Ana menü">
-          {NAV_LINKS.map((link) => (
+        <nav className="hidden items-center gap-7 lg:flex" aria-label={dict.header.mainNav}>
+          {navItems.map((item) => (
             <Link
-              key={link.href}
-              href={link.href}
-              aria-current={isActive(link.href) ? 'page' : undefined}
+              key={item.path}
+              href={localizedHref(locale, item.path)}
+              aria-current={isActive(item.path) ? 'page' : undefined}
               className={`text-sm font-medium transition-colors duration-200 hover:text-navy ${
-                isActive(link.href) ? 'text-navy' : 'text-muted'
+                isActive(item.path) ? 'text-navy' : 'text-muted'
               }`}
             >
-              {link.label}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -69,15 +94,20 @@ export default function SiteHeader() {
             <Phone className="h-4 w-4" aria-hidden="true" />
             {SITE_CONTACT.phoneDisplay}
           </a>
+          <LanguageSwitcher
+            locale={locale}
+            label={dict.header.languageLabel}
+            className="hidden sm:inline-flex"
+          />
           <Link
-            href="/iletisim"
+            href={contactHref}
             className="hidden rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-navy-deep sm:inline-flex"
           >
-            Bize Ulaşın
+            {dict.header.contactCta}
           </Link>
           <button
             type="button"
-            aria-label={menuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+            aria-label={menuOpen ? dict.header.menuClose : dict.header.menuOpen}
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
             className="flex h-11 w-11 items-center justify-center rounded-lg border border-line text-ink lg:hidden"
@@ -94,19 +124,19 @@ export default function SiteHeader() {
       {menuOpen && (
         <nav
           className="border-t border-line bg-canvas px-4 pb-5 pt-2 lg:hidden"
-          aria-label="Mobil menü"
+          aria-label={dict.header.mobileNav}
         >
           <div className="flex flex-col">
-            {NAV_LINKS.map((link) => (
+            {navItems.map((item) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={item.path}
+                href={localizedHref(locale, item.path)}
                 onClick={() => setMenuOpen(false)}
                 className={`border-b border-surface-strong py-3 text-sm font-medium transition-colors duration-200 hover:text-navy ${
-                  isActive(link.href) ? 'text-navy' : 'text-ink'
+                  isActive(item.path) ? 'text-navy' : 'text-ink'
                 }`}
               >
-                {link.label}
+                {item.label}
               </Link>
             ))}
           </div>
@@ -118,11 +148,17 @@ export default function SiteHeader() {
               <Phone className="h-4 w-4" aria-hidden="true" />
               {SITE_CONTACT.phoneDisplay}
             </a>
+            <LanguageSwitcher
+              locale={locale}
+              label={dict.header.languageLabel}
+              className="inline-flex self-start sm:hidden"
+            />
             <Link
-              href="/iletisim"
+              href={contactHref}
+              onClick={() => setMenuOpen(false)}
               className="inline-flex justify-center rounded-lg bg-navy px-5 py-3 text-sm font-semibold text-white"
             >
-              Bize Ulaşın
+              {dict.header.contactCta}
             </Link>
           </div>
         </nav>
