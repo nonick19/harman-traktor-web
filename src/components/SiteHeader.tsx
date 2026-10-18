@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Phone, Tractor } from 'lucide-react'
+import { Menu, X, Phone } from 'lucide-react'
+import { BrandMark } from './BrandMark'
 import { ROUTES, SITE_CONTACT } from '@/lib/site'
 import { localizedHref, type Dictionary, type Locale } from '@/i18n'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
@@ -59,7 +60,7 @@ export default function SiteHeader({
           aria-label={dict.header.homeAria}
         >
           <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-white">
-            <Tractor className="h-6 w-6" aria-hidden="true" />
+            <BrandMark className="h-7 w-7" />
           </span>
           <span className="leading-tight">
             <span className="block text-base font-bold tracking-tight text-ink">

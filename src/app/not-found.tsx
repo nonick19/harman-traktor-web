@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { ArrowLeft, Tractor } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import { ROUTES } from '@/lib/site'
 import { getDictionary } from '@/i18n'
+import { BrandMark } from '@/components/BrandMark'
 
 const dict = getDictionary('tr')
 
@@ -18,7 +19,7 @@ export default function NotFound() {
     <section className="bg-surface">
       <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
         <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-navy text-nh-yellow">
-          <Tractor className="h-8 w-8" aria-hidden="true" />
+          <BrandMark className="h-9 w-9" />
         </span>
         <p className="mt-8 font-mono text-5xl font-bold text-navy">404</p>
         <h1 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">

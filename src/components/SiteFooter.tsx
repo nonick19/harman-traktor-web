@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { MapPin, Phone, Mail, MessageCircle, Tractor } from 'lucide-react'
+import { MapPin, Phone, Mail, MessageCircle } from 'lucide-react'
+import { BrandMark } from './BrandMark'
 import { ROUTES, SITE_CONTACT, buildWhatsAppUrl } from '@/lib/site'
 import { localizedHref, type Dictionary, type Locale } from '@/i18n'
 
@@ -30,7 +31,7 @@ export default function SiteFooter({
             aria-label={dict.header.homeAria}
           >
             <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10 text-nh-yellow">
-              <Tractor className="h-6 w-6" aria-hidden="true" />
+              <BrandMark className="h-7 w-7" />
             </span>
             <span className="text-lg font-bold tracking-tight text-white">
               Hüseyin Baydur
