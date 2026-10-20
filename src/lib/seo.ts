@@ -92,6 +92,7 @@ export function localBusinessJsonLd(): Record<string, unknown> {
     email: SITE_CONTACT.email,
     foundingDate: String(FOUNDING_YEAR),
     image: `${SITE_URL}/images/bicerdover-hero.png`,
+    logo: `${SITE_URL}/images/logo-baydur.png`,
     priceRange: '₺₺',
     address: {
       '@type': 'PostalAddress',

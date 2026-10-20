@@ -18,8 +18,8 @@ export default function NotFound() {
   return (
     <section className="bg-surface">
       <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-        <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-navy text-nh-yellow">
-          <BrandMark className="h-9 w-9" />
+        <span className="flex h-24 w-24 items-center justify-center rounded-2xl bg-white p-2 shadow-sm ring-1 ring-line">
+          <BrandMark className="h-full w-full object-contain" />
         </span>
         <p className="mt-8 font-mono text-5xl font-bold text-navy">404</p>
         <h1 className="mt-4 text-2xl font-bold tracking-tight text-navy sm:text-3xl">
