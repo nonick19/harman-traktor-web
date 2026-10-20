@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://baydur.net
+Sitemap: https://baydur.net/sitemap.xml
